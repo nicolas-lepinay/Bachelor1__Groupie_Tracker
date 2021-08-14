@@ -1,0 +1,637 @@
+@import url('https://fonts.googleapis.com/css?family=Dosis&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Megrim&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+@keyframes gradient {
+    0% {
+        background-position: 0%
+    }
+    100% {
+        background-position: 100%
+    }
+}
+
+@-webkit-keyframes neon1 {
+    from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FF1177, 0 0 70px #FF1177, 0 0 80px #FF1177, 0 0 100px #FF1177, 0 0 150px #ff1111;
+    }
+    to {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FF1177, 0 0 35px #FF1177, 0 0 40px #FF1177, 0 0 50px #FF1177, 0 0 75px #ff1111;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid rgb(144, 112, 112);
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    margin-left: 0;
+    margin-top: 0;
+    overflow: hidden;
+    background: url('background-image_blurry.jpg') no-repeat center center fixed;
+    /* Background size : 15% x (1920*1080) */
+    background-size: 2208px 1242px;
+    animation: gradient 50s linear infinite;
+    animation-direction: alternate;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.common {
+    /* ZONE DU HAUT COMMUNE A TOUS LES TEMPLATES HTML */
+    background-color: rgba(141, 0, 78, 0.3);
+    /* border-top: 1px solid white; */
+    border-bottom: 2px solid white;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    z-index: 1000;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 0.46fr 1.54fr;
+    grid-template-areas: "title form";
+    overflow: auto;
+}
+
+form {
+    grid-area: form;
+    display: flex;
+    justify-content: center;
+    width: 50vw;
+    /* grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas: "selector sch1 sch2-3 ok-button"; */
+}
+
+#selector,
+#sch1,
+#sch2-3,
+#ok-button {
+    padding-bottom: 15px;
+    padding-left: 40px;
+}
+
+#selector {
+    grid-area: selector;
+}
+
+#sch1 {
+    grid-area: sch1;
+}
+
+#sch2-3 {
+    grid-area: sch2-3;
+    display: flex;
+}
+
+#ok-button {
+    grid-area: ok-button;
+}
+
+@media only screen and (max-width: 1155px) {
+    .common {
+        grid-template-columns: 0.6fr 1.4fr;
+    }
+}
+
+@media only screen and (max-width: 1075px) {
+    form {
+        grid-area: form;
+        display: flex;
+        flex-direction: column;
+    }
+    #selector,
+    #sch1,
+    #sch2-3,
+    #ok-button {
+        padding-left: 0px;
+    }
+    #sidebarMenu {
+        /* CAR LA BAR VIOLETTE TRANSPARENTE .COMMON DOUBLE DE TAILLE */
+        top: 122px!important;
+    }
+}
+
+
+/*  ------------ ⭐ 𝐏𝐀𝐆𝐄 𝐏𝐑𝐈𝐍𝐂𝐈𝐏𝐀𝐋𝐄 ⭐ ------------  */
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.title {
+    /* TITRE 'HOME' */
+    margin-left: 4%;
+    margin-top: 7px;
+    font-size: 22px;
+    text-decoration: none;
+    color: white;
+    /* text-transform: uppercase; */
+    grid-area: title;
+}
+
+#sch {
+    /* BARRE DE RECHERCHE */
+    background-color: rgba(255, 255, 255, 0.200);
+    color: rgb(255, 255, 255);
+    border: 2px solid white;
+    height: 25px;
+    width: 300px;
+    border-radius: 25px;
+    padding-left: 20px;
+    font-size: 16px;
+}
+
+#sch2,
+#sch3 {
+    /* BARRES DE RECHERCHE 2 & 3 */
+    display: none;
+    background-color: rgba(255, 255, 255, 0.200);
+    color: rgb(255, 255, 255);
+    border: 1px solid white;
+    height: 25px;
+    width: 60px;
+    border-radius: 5px;
+    padding-left: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+::placeholder {
+    color: rgb(255, 255, 255, 0.9);
+}
+
+#between,
+#and {
+    display: none;
+    color: white;
+    font-weight: bold;
+    font-size: 80%;
+}
+
+.selector {
+    /* MENU DÉROULANT */
+    background-color: rgba(255, 255, 255, 0.500);
+    color: rgb(0, 0, 0);
+    border: 1px solid white;
+    font-size: 16px;
+    height: 30px;
+    border-radius: 5px;
+    text-align-last: center;
+}
+
+button {
+    /* BOUTON VALIDER */
+    background-color: rgb(255, 255, 255);
+    opacity: 0.8;
+    border: 2x solid white;
+    color: rgb(0, 0, 0);
+    height: 28px;
+    width: 50px;
+    border-radius: 200px;
+    font-size: 16px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+button:hover {
+    border-radius: 3px;
+    opacity: 1;
+}
+
+.container {
+    /* ZONE (TRANSPARENTE) CONTENANT TOUS LES ARTISTES ET LA SCROLLBAR  */
+    display: flex;
+    flex-direction: column;
+    max-width: 60%;
+    max-height: 100%;
+    position: absolute;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, 0%);
+}
+
+.artists {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    overflow: auto;
+}
+
+.artist {
+    /* CHAQUE CASE (UNE PAR ARTISTE) */
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0px;
+    /* background: linear-gradient(180deg, rgba(255, 255, 255, 0.25) 25%, rgba(255, 255, 255, 0.7) 50%, rgba(255, 255, 255, 0.25) 75%); */
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 60%, rgba(255, 255, 255, 0.0) 95%);
+    text-align: center;
+    text-shadow: 1px 1px 3px black
+    /* Syntaxe : offset-x | offset-y | blur-radius | color */
+    ;
+    margin: 0px 10px 30px 10px;
+    cursor: pointer;
+}
+
+.cover {
+    /* padding: 10px; */
+    border-radius: 5px;
+}
+
+.info {
+    overflow: auto;
+    color: white;
+    font-size: 16px;
+}
+
+.name {
+    /* NOM DE L'ARTISTE */
+    font-family: 'Megrim', cursive;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 170%;
+    /* margin-bottom: 10px; */
+}
+
+.img {
+    /* IMAGE DES ARTISTES */
+    border-radius: 200px
+    /* Forme ronde */
+    ;
+}
+
+@media all and (max-device-width: 1366px) {
+    .container {
+        padding: 10px;
+        justify-content: center;
+        height: 80vh;
+        overflow: scroll;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .artist {
+        width: 220px;
+    }
+}
+
+@media all and (max-device-width: 1200px) {
+    .container {
+        padding: 10px;
+        justify-content: center;
+        display: table;
+        height: 80vh;
+        overflow: scroll;
+        position: absolute;
+        top: 0%;
+        left: 50%;
+        transform: translate(-50%, 0%);
+    }
+    .artist {
+        width: 90vw;
+    }
+}
+
+
+/*  ------------ ⭐ 𝐏𝐀𝐆𝐄 𝐃𝐄𝐓𝐀𝐈𝐋 ⭐ ------------  */
+
+.wrapper-container {
+    /* ZONE AVEC FOND NOIR-TRANSPARENT CONTENANT TOUS LES ÉLÉMENTS ET LA SCROLLBAR*/
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 60%, rgba(0, 0, 0, 0.8) 100%);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    position: absolute;
+    border: none;
+    color: rgb(255, 255, 255);
+    margin-top: 0px;
+    overflow: hidden;
+}
+
+.wrapper {
+    /* GRILLE CONTENANT LE LAYOUT (COLONNE SIDEBAR, LIGNES BAND, MAIN, WIKI, GOOGLE, MAP) */
+    color: white;
+    text-shadow: 1px 1px 3px black/* Syntaxe : offset-x | offset-y | blur-radius | color */
+    ;
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 0.5fr 1.5fr;
+    grid-template-rows: 1.8fr 0.8fr 0.8fr 0.8fr 0.8fr;
+    grid-template-areas: "sidebar band" "sidebar main" "sidebar wiki" "sidebar google" "sidebar map-container";
+    row-gap: 2rem;
+    column-gap: 7rem;
+    padding-top: 5rem;
+    margin-left: 6rem;
+    margin-right: 1.5rem;
+    margin-top: 1px;
+    overflow: auto;
+}
+
+#sidebar {
+    grid-area: sidebar;
+}
+
+#band,
+#main,
+#wiki,
+#google,
+#map-container {
+    margin-right: 6rem;
+}
+
+#band {
+    font-family: 'Megrim', cursive;
+    grid-area: band;
+    color: #fff;
+    font-size: 8em;
+    font-weight: bolder;
+    letter-spacing: 6px;
+    -webkit-animation: neon1 1.5s ease-in-out infinite alternate;
+    -moz-animation: neon1 1.5s ease-in-out infinite alternate;
+    animation: neon1 1.5s ease-in-out infinite alternate;
+    text-decoration: none;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    transition: all 0.5s;
+    text-align: center;
+}
+
+#main {
+    /* DIV DE LA DESCRIPTION WIKIPEDIA */
+    grid-area: main;
+    text-align: center;
+}
+
+#main2 {
+    /* TEXTE DE LA DESCRIPTION WIKIPEDIA UNIQUEMENT */
+    text-transform: none;
+    font-size: 120%;
+}
+
+#wiki {
+    grid-area: wiki;
+}
+
+#google {
+    grid-area: google;
+}
+
+#wiki,
+#google,
+#map-container {
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-top-left-radius: 25px;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+#map-container {
+    grid-area: map-container;
+    height: 71px;
+}
+
+#map-subcontainer {
+    opacity: 0.0;
+    transition: opacity 1s ease-out;
+}
+
+@keyframes bounce-background {
+    from {
+        background-position: top;
+    }
+    50% {
+        background-position: bottom;
+    }
+    to {
+        background-position: top;
+    }
+}
+
+#map-banner {
+    /* Bannière Localisation des concerts*/
+    /* background: linear-gradient(0deg, rgba(220, 220, 220, 1) 0%, rgba(255, 255, 255, 1) 100%); */
+    background: url('map-img.png') no-repeat center center;
+    animation-name: bounce-background;
+    animation-duration: 200s;
+    animation-iteration-count: infinite;
+    padding-left: 30px;
+    padding-top: 0.5em;
+    color: rgb(255, 255, 255);
+    font-size: 180%;
+    border: 2px solid rgb(190, 190, 190);
+    text-shadow: 1px 1px 3px rgb(0, 0, 0);
+    font-family: 'Montserrat';
+    height: 71px;
+    transition: height 1s ease-out;
+}
+
+#img-container {
+    /* DIV CONTENANT L'IMAGE DU GROUPE */
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.iframe {
+    background: url('map-img.png') no-repeat center center;
+    width: 99.5%;
+    height: 95px;
+    transition: height 1.5s ease-out;
+    overflow: hidden;
+}
+
+
+/* .iframe:hover {
+    height: 600px;
+    transition: height 1.5s ease-in;
+} */
+
+.city {
+    /* text-transform: capitalize; */
+    font-weight: bolder;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    height: 20px;
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.85) 15%, rgba(0, 0, 0, 0) 60%);
+    color: white;
+    font-family: 'Dosis', sans-serif;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 60%;
+    letter-spacing: 3px;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+    margin-top: auto;
+    padding-top: 1em;
+    border-top: 1px solid transparent;
+    border-image: radial-gradient(circle, rgba(255, 255, 255, 1) 15%, rgba(0, 0, 0, 0) 45%);
+    border-image-slice: 1;
+}
+
+#no-result {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    margin-top: 100px;
+    font-family: 'Megrim', cursive;
+    color: #fff;
+    font-size: 500%;
+    font-weight: bolder;
+    -webkit-animation: neon1 1.5s ease-in-out infinite alternate;
+    -moz-animation: neon1 1.5s ease-in-out infinite alternate;
+    animation: neon1 1.5s ease-in-out infinite alternate;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+
+/*  ------------ ⭐ 𝐌𝐄𝐍𝐔 𝐇𝐀𝐌𝐁𝐔𝐑𝐆𝐄𝐑 ⭐ ------------  */
+
+#sidebarMenu {
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    width: 250px;
+    /* HAUTEUR DE LA BAR VIOLETTE TRANSPARENT .COMMON : */
+    margin-top: 57px;
+    transform: translateX(-250px);
+    transition: transform 250ms ease-in-out;
+    background: rgb(20, 20, 20, 0.97);
+    /* REND LE TEXTE PROGRESSIVEMENT TRANSPARENT DANS LE MENU (FONCTIONNE MAL AVEC FIREFOX) : */
+    -webkit-mask-image: -webkit-gradient(linear, left 40%, left 65%, from(black), to(rgba(0, 0, 0, 0)));
+    mask-image: gradient(linear, left 40%, left 65%, from(black), to(rgba(0, 0, 0, 0)));
+
+    overflow: auto;
+}
+
+.sidebarMenuInner {
+    margin: 0;
+    padding: 0;
+}
+
+.sidebarMenuInner li {
+    list-style: none;
+    /* COULEUR DU TEXTE DANS MENU : */
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 22px;
+    padding: 15px;
+}
+
+.sidebarMenuInner li span {
+    padding-left: 37px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.sidebarMenuInner li a {
+    color: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+input[type="checkbox"]:checked~#sidebarMenu {
+    transform: translateX(0);
+}
+
+input[type=checkbox] {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    display: none;
+}
+
+.sidebarIconToggle {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    cursor: pointer;
+    position: absolute;
+    z-index: 99;
+    height: 100%;
+    width: 100%;
+    top: 30px;
+    left: 60px;
+    height: 22px;
+    width: 22px;
+}
+
+.spinner {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.horizontal {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    position: relative;
+    float: left;
+    margin-top: 3px;
+}
+
+.diagonal.part-1 {
+    position: relative;
+    transition: all 0.3s;
+    box-sizing: border-box;
+    float: left;
+}
+
+.diagonal.part-2 {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    position: relative;
+    float: left;
+    margin-top: 3px;
+}
+
+input[type=checkbox]:checked~.sidebarIconToggle>.horizontal {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    opacity: 0;
+}
+
+input[type=checkbox]:checked~.sidebarIconToggle>.diagonal.part-1 {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    transform: rotate(135deg);
+    margin-top: 8px;
+}
+
+input[type=checkbox]:checked~.sidebarIconToggle>.diagonal.part-2 {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    transform: rotate(-135deg);
+    margin-top: -9px;
+}
+
+.mini-img {
+    width: 10%;
+    border-radius: 100px;
+    margin-right: 15px;
+}

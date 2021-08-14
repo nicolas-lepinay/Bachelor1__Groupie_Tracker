@@ -1,0 +1,87 @@
+{{ define "All" }}
+
+<style>
+    #map {
+        height: 600px;
+        width: 100%;
+    }
+    
+    .img {
+        border-radius: 800px;
+        width: 100%;
+    }
+    
+    @media only screen and (max-width: 1000px) {
+        .wrapper {
+            grid-template-columns: 1fr;
+            grid-template-rows: 1.3fr 1.5fr 0.8fr 0.8fr 0.8fr 0.8fr;
+            grid-template-areas: "band" "main" "sidebar" "wiki" "google" "map-container";
+        }
+        .wrapper-container {
+            height: 500vh;
+        }
+        .img {
+            width: 60%;
+        }
+    }
+</style>
+
+{{$API := .}} {{$ID := .ID}}
+<div class="wrapper-container">
+    <div class="wrapper">
+        <div id="sidebar">
+            <div id="img-container"><img class="img" src="{{ (index .Artists .ID).Image }}"></div>
+            <div>❱ Active since : <strong>{{(index .Artists .ID).CreationDate}}</strong></div>
+            <br>
+            <div id="first-album">❱ First album release : <strong>{{(index .Artists .ID).FirstAlbum}}</strong></div>
+            <br>
+            <div>❱ List of members : {{ range (index .Artists .ID).Members }} <br><span style="margin-left:3rem; font-style: italic">{{ . }}</span> {{end}}</div>
+            <br>
+
+            <div>❱ Concert dates :<br> {{ range $i, $v := (index .Relations.Index .ID).DateLocations}}
+                <h2 class="city" style="margin-left:3rem">{{ $i }} :</h2>
+                <p class="concert-dates" style="margin-left:3rem">{{ $v }}</p> {{end}}
+            </div>
+        </div>
+
+        <div id="band">{{(index .Artists .ID).Name}}</div>
+
+        <div id="main"><span style="font-size:300%; font-weight:bolder; font-family: 'Times New Roman'">“</span>
+            <a id="main2">Main</a>
+            <span style="font-size:300%; font-weight:bolder; font-family: 'Times New Roman'">”</span></div>
+
+
+        <div id="wiki" onclick="expand('wiki')">
+            <p style="padding-left: 2rem">Wikipedia ▼</p>
+            <div><iframe id="iframeWiki" class="iframe" src="https://fr.wikipedia.org/wiki/{{(index .Artists .ID).Name}}?printable=yes">iFrame can't be displayed.</iframe>
+            </div>
+        </div>
+
+
+        <div id="google" onclick="expand('google')">
+            <p style="padding-left: 30px">Images ▼</p>
+            <div><iframe id="iframeGoogle" class="iframe" src="https://engine.presearch.org/images?q={{(index .Artists .ID).Name}}">iFrame can't be displayed.</iframe>
+            </div>
+        </div>
+
+        <div id="map-container">
+            <p style="padding-left: 30px" onclick="expand('map')">Concerts ▼</p>
+            <div id="map-banner">🌍&nbsp;&nbsp;&nbsp;Map</div>
+            <div id="map-subcontainer">
+                <div id="map-content" style="height:100px">
+                    <div class="select">
+                        <select style="padding-left: 20px" name="slct" id="slct" onchange="newLocation(this.value)">
+            {{ range (index .Locations.Index .ID).Locations }}
+                <option value="{{ . }}" selected>{{ . }}</option>
+            {{end}}
+        </select>
+                    </div>
+
+                    <div id='map'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{end}}

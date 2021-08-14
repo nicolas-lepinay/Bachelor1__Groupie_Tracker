@@ -1,0 +1,114 @@
+<!-- TEMPLATE EN COMMUN AUX 2 AUTRES :  -->
+{{define "common" }}
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="static/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Pour la map  -->
+    <script src='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/v3.3.1/mapbox.css' rel='stylesheet'>
+    <!-- Pour la map (Fin) -->
+    <title>Groupie Tracker</title>
+</head>
+
+
+<body>
+    <div class="common">
+        <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
+        <label for="openSidebarMenu" class="sidebarIconToggle">
+          <div class="spinner diagonal part-1"></div>
+          <div class="spinner horizontal"></div>
+          <div class="spinner diagonal part-2"></div>
+        </label>
+        <div id="sidebarMenu">
+            <ul class="sidebarMenuInner">
+                <a href="/">
+                    <li><span>Home</span></li>
+                </a>
+
+                {{range .Artists}}
+                <li class="mini-artist" style="display:block">
+                    <!-- DIV INVISIBLE CONTENANT TOUTES LES INFOS DE CHAQUE GROUPE (pour effectuer une recherche) -->
+                    <div class="invisible" style="display:none">
+                        <p class="invisibleName">{{.Name}}</p>
+                        <p class="invisibleMembers">{{range .Members }} {{ . }} {{end}}</p>
+                        <p class="invisibleAlbum">{{.FirstAlbum}}</p>
+                        <p class="invisibleCreation">{{.CreationDate}}</p>
+                        <p class="invisibleNumber">{{len .Members}}</p>
+                        <p class="invisibleLocations">{{range .Locations }} {{ . }} {{end}}</p>
+                    </div>
+                    <a href='http://localhost:8000/artist?id={{.ID}}'>
+                        <img class="mini-img" src={{.Image}}> {{.Name}}
+                    </a>
+                </li>
+                {{end}}
+                <!--- Cases vides car le background du menu est transparent et les dernières cases ne se voient pas -->
+                <li id="mini-no-result" style="display:none"><a>Aucun résultat.</a></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+
+        <form action="/" method="POST">
+            <!-- MENU DÉROULANT : -->
+            <div id="selector">
+                <select class="selector" id="sType" name="searchType">
+                <option selected value="artist">Artist</option>
+                <option value="member">Member</option>
+                <option value="location">Location</option>
+                <option value="firstAlbum">First Album</option>
+                <option value="creationDate">Creation Date</option>
+              </select>
+            </div>
+            <!-- BARRE DE RECHERCHE : -->
+            <div id="sch1">
+                <input id="sch" type="text" name="toSearch" list="list" placeholder=" 🔎 ..." style="display:inline">
+            </div>
+            <div id="sch2-3">
+                <h1 class="search" id="between">BETWEEN...</h1>
+                <input class="search" id="sch2" type="text" name="between" placeholder="...">
+                <h1 class="search" id="and">AND...</h1>
+                <input class="search" id="sch3" type="text" name="and" placeholder="...">
+            </div>
+
+            <datalist id="list">
+            {{$API := .}} 
+            {{range $i, $v := .Artists}}<option>{{(index $API.Artists $i).Name}} | Artist</option>{{end}}
+            {{range $i, $v := .Artists}}{{range .Members }}<option>{{.}} | Member</option>{{end}}{{end}}
+            {{range $i, $v := .Locations.Index}}{{range .Locations }}<option>{{.}} | Location</option>{{end}}{{end}}
+            {{range $i, $v := .Artists}}<option>{{(index $API.Artists $i).FirstAlbum}} | First Album</option>{{end}}
+            {{range $i, $v := .Artists}}<option>{{(index $API.Artists $i).CreationDate}} | Creation Date</option>{{end}}
+          </datalist>
+            <!-- BOUTON VALIDER : -->
+            <div id="ok-button">
+                <button type="submit">✔️</button>
+            </div>
+
+    </div>
+
+    {{template "All" .}}
+
+    <footer>Created by Nicolas Lépinay & Virgil Nauleau</footer>
+
+</body>
+
+<script src="static/script.js"></script>
+
+</html>
+
+{{end}}

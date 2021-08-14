@@ -1,0 +1,23 @@
+{{ define "All" }}
+
+<a href="/" id="no-result" title="👉 Home Page " style="display:none">Aucun résultat...</a>
+
+<div class="container">
+    <div class="artists">
+        {{range .Artists}}
+        <a class="artist" href='http://localhost:8000/artist?id={{.ID}}' style="display:block">
+            <div class="name">
+                <p>{{.Name}}</p>
+            </div>
+            <div class="cover"> <img class="img" src={{.Image}} alt={{.Name}}> </div>
+            <div class="info">
+                <p>❱ Active since <strong>{{.CreationDate}}</strong></p>
+                <p>❱ Has <strong>{{len .Members}}</strong> members</p>
+            </div>
+        </a>
+        {{end}}
+    </div>
+
+</div>
+
+{{end}}
